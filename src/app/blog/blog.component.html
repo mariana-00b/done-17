@@ -1,0 +1,163 @@
+<header class="header">
+  <article class="header__logo">Angular Blog</article>
+  <nav class="header__nav">
+    <ng-container *ngIf="!isLogged; else user">
+      <ul>
+        <li>
+          <button
+            class="btn btn_style_outline-green"
+            (click)="openSignInModal()"
+          >
+            Sign In
+          </button>
+        </li>
+        <li>
+          <button
+            class="btn btn_style_outline-blue"
+            (click)="openSignUpModal()"
+          >
+            Sign Up
+          </button>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-template #user>
+      <ul>
+        <li>
+          <button
+            class="btn btn_style_outline-green"
+            (click)="openAddPostModal()"
+          >
+            Add post
+          </button>
+        </li>
+        <li>
+          <span class="header__user">{{ accountName }}</span>
+        </li>
+        <li>
+          <button class="btn btn_style_outline-yellow" (click)="signOutUser()">
+            Sign Out
+          </button>
+        </li>
+      </ul>
+    </ng-template>
+  </nav>
+</header>
+
+<main class="main">
+  <article class="post" *ngFor="let post of arrPosts">
+    <h1 class="post__title">{{ post.topic }}</h1>
+    <div class="post__info">
+      <span class="post__author">Posted by: {{ post.postedBy }}</span>
+      <time class="post__time">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          fill="currentColor"
+          class="bi bi-clock"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"
+          />
+          <path
+            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"
+          />
+        </svg>
+        {{ post.date | date: "HH:mm, dd.MM.YYYY" }}
+      </time>
+    </div>
+    <div class="post__text">{{ post.message }}</div>
+    <ng-container *ngIf="isEditButtonVisible">
+      <div class="post__buttons" *ngIf="true">
+        <button class="btn btn_style-solid-orange btn_size_small" (click)="openEditPostModal(post)">Edit</button>
+        <button class="btn btn_style-solid-red btn_size_small" (click)="deletePost(post.id, post.postedBy)">Delete</button>
+      </div>
+    </ng-container>
+  </article>
+</main>
+
+<article class="modal" *ngIf="isModalOpen">
+  <div class="modal__fade">
+    <div class="modal__content">
+      <header class="modal__header">
+        <span class="modal__title">{{ popUpTitle }}</span>
+        <span class="modal__cross" (click)="closeModal()">&#10006;</span>
+      </header>
+      <form class="modal__form">
+        <ng-container *ngIf="!isAddPost; else addNewPost">
+          <div class="input-wrapper" *ngIf="isSignUp">
+            <label class="modal__label" for="text">Username:</label>
+            <input
+              class="modal__input"
+              [(ngModel)]="username"
+              name="username"
+              type="text"
+              id="text"
+            />
+          </div>
+          <div class="input-wrapper">
+            <label class="modal__label" for="email">Email:</label>
+            <input
+              class="modal__input"
+              [(ngModel)]="email"
+              name="email"
+              type="email"
+              id="email"
+            />
+          </div>
+          <div class="input-wrapper">
+            <label class="modal__label" for="password">Password:</label>
+            <input
+              class="modal__input"
+              [(ngModel)]="password"
+              name="password"
+              type="password"
+              id="password"
+            />
+          </div>
+        </ng-container>
+        <ng-template #addNewPost>
+          <div class="input-wrapper">
+            <label class="modal__label" for="title">Title:</label>
+            <input class="modal__input" type="text" id="title" [(ngModel)]="title" name="title" />
+          </div>
+          <div class="input-wrapper">
+            <label class="modal__label" for="text">Text:</label>
+            <textarea
+              class="modal__input modal__textarea"
+              type="text"
+              id="text"
+              [(ngModel)]="text"
+              name="text"
+            ></textarea>
+          </div>
+        </ng-template>
+      </form>
+      <footer class="modal__footer">
+        <button class="btn btn_style_solid-dr-green" (click)="closeModal()">Close</button>
+        <ng-container *ngIf="isSign; else isPost">
+          <ng-container *ngIf="isSignUp; else isSignIn">
+            <button class="btn btn_style_solid-blue" (click)="signUpUser()">
+              Submit
+            </button>
+          </ng-container>
+          <ng-template #isSignIn>
+            <button class="btn btn_style_solid-green" (click)="signInUser()">
+              Submit
+            </button>
+          </ng-template>
+        </ng-container>
+        <ng-template #isPost>
+          <ng-container *ngIf="!isEditPost; else editCurrentPost">
+            <button class="btn btn_style_solid-green" (click)="addPost()">Post</button>
+          </ng-container>
+          <ng-template #editCurrentPost>
+            <button class="btn btn_style_solid-green" (click)="editPost()">Edit Post</button>
+          </ng-template>
+        </ng-template>
+      </footer>
+    </div>
+  </div>
+</article>

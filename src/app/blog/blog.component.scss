@@ -1,0 +1,209 @@
+@import "../../stylings/base/variables";
+@import "../../stylings/base/mixin";
+
+.main {
+  padding: 3.8rem calc(50vw - 570px) 0;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 3.8rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 1rem;
+  background-color: #30393d;
+}
+
+.header__logo {
+  color: $white;
+  font-size: 1.3rem;
+}
+
+.header__nav li {
+  display: inline;
+}
+
+.header__user {
+  padding: $btn-padding;
+  border: 2px solid $btn-yellow;
+  color: #000;
+  background-color: $btn-yellow;
+
+  cursor: default;
+}
+
+.post {
+  margin: 0.8rem 0;
+  padding: 1.4rem 1.2rem;
+
+  box-shadow: 0 0 1px 1px #cacaca;
+  border-radius: $bd-radius;
+}
+
+.post__title,
+.post__info {
+  margin-bottom: 0.8rem;
+}
+
+.post__title {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.post__info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post__author {
+  font-weight: 500;
+  font-size: 1rem;
+  color: $gray;
+}
+
+.post__time {
+  font-size: 0.9rem;
+  color: $gray;
+}
+
+.post__buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.8rem;
+}
+
+// Buttons =================================>
+.btn {
+  padding: $btn-padding;
+  border-radius: $bd-radius;
+
+  transition: all 0.1s ease-in-out;
+}
+
+.btn_size_small {
+  padding: 0.4rem 0.65rem;
+}
+
+.btn_style_outline-green {
+  @include outlineBtnStyle($btn-green);
+  @include borderRightRadius();
+}
+
+.btn_style_outline-blue {
+  @include outlineBtnStyle($btn-blue);
+  @include borderLeftRadius();
+}
+
+.btn_style_outline-yellow {
+  @include outlineBtnStyle($btn-yellow, $black);
+  @include borderLeftRadius();
+}
+
+.btn_style-solid-orange {
+  @include defaultBtnStyle($btn-orange);
+  @include borderRightRadius();
+}
+
+.btn_style-solid-red {
+  @include defaultBtnStyle($btn-red, $white);
+  @include borderLeftRadius();
+}
+
+.btn_style_solid-blue {
+  @include defaultBtnStyle($btn-blue, $white);
+}
+
+.btn_style_solid-green {
+  @include defaultBtnStyle($btn-green, $white);
+}
+
+.btn_style_solid-dr-green {
+  margin-right: 0.5rem;
+  @include defaultBtnStyle(#68737a, $white);
+}
+
+// POP-UP =================================>
+.modal__fade {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  background-color: rgba($black, 0.7);
+}
+
+.modal__content {
+  position: absolute;
+  top: 8vh;
+  left: 50%;
+  z-index: 1001;
+  transform: translateX(-50%);
+  width: 32rem;
+  border-radius: $bd-radius;
+  background-color: $white;
+}
+
+.modal__header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2rem;
+  border-bottom: 2px solid #eceeef;
+}
+
+.modal__title {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.modal__cross {
+	cursor: pointer;
+}
+
+.modal__form {
+  position: relative;
+  padding: 1.2rem;
+  border-bottom: 2px solid #eceeef;
+}
+
+.input-wrapper:not(:last-child) {
+  margin-bottom: 1.4rem;
+}
+
+.modal__input {
+  display: block;
+  width: 100%;
+  height: 2.4rem;
+  padding: 7px;
+  margin-top: 0.6rem;
+
+  border: 2px solid rgb(233, 233, 233);
+  border-radius: $bd-radius;
+
+  &:focus {
+    box-shadow: 0 0 0 2px lightskyblue;
+  }
+}
+
+.modal__textarea {
+  height: 7rem;
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.2rem;
+}

@@ -1,0 +1,47 @@
+@mixin defaultBtnStyle($bgColor, $textColor: #000, $hoverTextColor: #fff) {
+	color: $textColor;
+	background-color: $bgColor;
+
+	&:hover {
+		background-color: darken($bgColor, 4)
+	}
+
+	&:active, &:focus {
+		box-shadow: 0 0 0 3px rgba($bgColor, .5);
+	}
+}
+
+@mixin outlineBtnStyle($mainColor, $hoverTextColor: #fff) {
+	color: $mainColor;
+	border: 2px solid $mainColor;
+
+	&:hover {
+		color: $hoverTextColor;
+		background-color: $mainColor;
+	}
+
+	&:active, &:focus {
+		box-shadow: 0 0 0 2px rgba($mainColor, .8);
+	}
+}
+
+@mixin popUpLine() {
+	&::before {
+		content: "";
+		position: absolute;
+		bottom: -20px;
+		left: -19px;
+		width: 108%;
+		border-bottom: 2px solid #e6e6e6;
+	}
+}
+
+@mixin borderRightRadius($size: 0px) {
+	border-top-right-radius: $size;
+	border-bottom-right-radius: $size;
+}
+
+@mixin borderLeftRadius($size: 0px) {
+	border-top-left-radius: $size;
+	border-bottom-left-radius: $size;
+}
